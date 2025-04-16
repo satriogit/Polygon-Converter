@@ -54,8 +54,8 @@ if uploaded_file is not None:
         # #     final_value = '- ' + get_value.astype('string')
 
 
-        # st.subheader("Data from the Excel file:")
-        # st.dataframe(final_value, hide_index=True)
+        st.subheader("Data from the Excel file:")
+        st.dataframe(df, hide_index=True)
     except Exception as e:
         st.error(f"Error reading the Excel file: {e}")
 else:
