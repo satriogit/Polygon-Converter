@@ -28,7 +28,7 @@ if uploaded_file is not None:
         #     except ValueError as e:
         #         print(f"Error converting {dms}: {e}")
         #         return None
-              
+            
         # # ## Column Selection
         # selected_columns = df[['Corner 1', 'Unnamed: 4', 'Corner 2', 'Unnamed: 6', 'Corner 3', 'Unnamed: 8', 'Corner 4', 'Unnamed: 10', 'Corner 5', 'Unnamed: 12', 'Corner 6', 'Unnamed: 14', 'Corner 7', 'Unnamed: 16', 'Corner 8', 'Unnamed: 18', 'Corner 9', 'Unnamed: 20', 'Corner 10', 'Unnamed: 22', 'Corner 11', 'Unnamed: 24', 'Corner 12', 'Unnamed: 26', 'Corner 13', 'Unnamed: 28', 'Corner 14', 'Unnamed: 30', 'Corner 15', 'Unnamed: 32']]
         
