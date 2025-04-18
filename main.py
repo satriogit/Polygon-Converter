@@ -35,27 +35,27 @@ if uploaded_file is not None:
                 return None
 
         # Text input for filtering
-        filter_text = st.text_input("Enter the Site values to filter (comma-separated):", "")
+        filter_text = st.text_input("Enter the Cell Name values to filter (comma-separated):", "")
 
         # Button to generate the transformed DataFrame
         if st.button('Generate'):
             st.session_state['button_clicked'] = True
 
         if st.session_state['button_clicked']:
-            # Split the input text into a list of site values
-            site_values = [site.strip() for site in filter_text.split(',')]
+            # Split the input text into a list of cell values
+            cell_values = [sector.strip() for sector in filter_text.split(',')]
 
             # Filter the DataFrame based on user input
-            filtered_df = df[df['Site'].isin(site_values)]
+            filtered_df = df[df['Sector'].isin(cell_values)]
 
             if filtered_df.empty:
-                st.error("SITE NAME NOT IN THIS CIQ")
+                st.error("CELL NAME NOT IN THIS CIQ")
             else:
                 # Column Selection
-                selected_columns = filtered_df[['Site', 'Corner 1', 'Unnamed: 4', 'Corner 2', 'Unnamed: 6', 'Corner 3', 'Unnamed: 8', 'Corner 4', 'Unnamed: 10', 'Corner 5', 'Unnamed: 12', 'Corner 6', 'Unnamed: 14', 'Corner 7', 'Unnamed: 16', 'Corner 8', 'Unnamed: 18', 'Corner 9', 'Unnamed: 20', 'Corner 10', 'Unnamed: 22', 'Corner 11', 'Unnamed: 24', 'Corner 12', 'Unnamed: 26', 'Corner 13', 'Unnamed: 28', 'Corner 14', 'Unnamed: 30', 'Corner 15', 'Unnamed: 32']]
+                selected_columns = filtered_df[['Sector', 'Corner 1', 'Unnamed: 4', 'Corner 2', 'Unnamed: 6', 'Corner 3', 'Unnamed: 8', 'Corner 4', 'Unnamed: 10', 'Corner 5', 'Unnamed: 12', 'Corner 6', 'Unnamed: 14', 'Corner 7', 'Unnamed: 16', 'Corner 8', 'Unnamed: 18', 'Corner 9', 'Unnamed: 20', 'Corner 10', 'Unnamed: 22', 'Corner 11', 'Unnamed: 24', 'Corner 12', 'Unnamed: 26', 'Corner 13', 'Unnamed: 28', 'Corner 14', 'Unnamed: 30', 'Corner 15', 'Unnamed: 32']]
 
                 # Apply the conversion function only to DMS columns
-                dms_columns = [col for col in selected_columns.columns if col != 'Site']
+                dms_columns = [col for col in selected_columns.columns if col != 'Sector']
                 get_data = selected_columns.copy()
                 get_data[dms_columns] = selected_columns[dms_columns].applymap(dms_to_decimal)
 
@@ -81,12 +81,12 @@ if uploaded_file is not None:
                         get_data[col] = get_data[col].apply(transform_longitude)
 
                 # Rename columns for display
-                get_data.columns = ['Site'] + [f'Latitude {i//2 + 1}' if i % 2 == 0 else f'Longitude {i//2 + 1}' for i in range(len(get_data.columns) - 1)]
+                get_data.columns = ['Sector'] + [f'Latitude {i//2 + 1}' if i % 2 == 0 else f'Longitude {i//2 + 1}' for i in range(len(get_data.columns) - 1)]
 
                 # Convert the transformed DataFrame to CSV string without quotes and trailing comma
                 csv_lines = []
                 for index, row in get_data.iterrows():
-                    csv_lines.append(','.join([str(item) for item in row if item != '' and item != row['Site']]))
+                    csv_lines.append(','.join([str(item) for item in row if item != '' and item != row['Sector']]))
 
                 csv_string = '\n'.join(csv_lines)
 
