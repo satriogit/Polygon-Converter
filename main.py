@@ -10,7 +10,7 @@ st.divider()
 if 'button_clicked' not in st.session_state:
     st.session_state['button_clicked'] = False
 
-uploaded_file = st.file_uploader("Choose a file", type="xlsx")
+uploaded_file = st.file_uploader("Choose a CIQ file", type="xlsx")
 if uploaded_file is not None:
     try:
         df = pd.read_excel(uploaded_file, "PolygonData")
