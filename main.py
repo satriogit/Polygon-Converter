@@ -35,7 +35,7 @@ if uploaded_file is not None:
                 return None
 
         # Text input for filtering
-        filter_text = st.text_input("Enter the Cell Name values to filter (comma-separated):", "")
+        filter_text = st.text_input("Enter the CELLNAME to filter (comma-separated):", "")
 
         # Button to generate the transformed DataFrame
         if st.button('Generate'):
